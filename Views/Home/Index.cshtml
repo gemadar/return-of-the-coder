@@ -1,0 +1,158 @@
+﻿@model return_of_the_coder.Models.PersonModel
+
+<h1 class="title">Return of The Coder!</h1>
+<h5 class="sub">Please fill in the numbers below to stop The Witch</h5>
+
+<div class="container">
+    @using (Html.BeginForm("ReturnOfTheCoder", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        <div>
+        <div class="label">
+        <h8>First Person</h8>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                @Html.LabelFor(m => m.AgeOfDeath1, "Age of Death")
+            </div>
+            <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.AgeOfDeath1, new { @class = "fixed-width form-control", type = "number", id = "AgeOfDeath1", min = 0, required = "required" })
+                    @Html.ValidationMessageFor(m => m.AgeOfDeath1, "", new { @class = "text-danger" })
+                </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.YearOfDeath1, "Year of Death", new { @class = "col-md-2" })
+            <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.YearOfDeath1, new { @class = "fixed-width form-control", type = "number", id = "YearOfDeath1", min = 0, required = "required" })
+                    @Html.ValidationMessageFor(m => m.YearOfDeath1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        </div>
+
+        <div style="margin-top: 30px">
+            <div class="label">
+            <h6>Second Person</h6>
+            </div>
+        <div class="form-group">
+            <div class="col-md-2">
+            @Html.LabelFor(m => m.AgeOfDeath2, "Age of Death")
+            </div>
+            <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.AgeOfDeath2, new { @class = "fixed-width form-control", type = "number", id = "AgeOfDeath2", min = 0, required = "required" })
+                    @Html.ValidationMessageFor(m => m.AgeOfDeath2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+            @Html.LabelFor(m => m.YearOfDeath2, "Year of Death")
+            </div>
+            <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.YearOfDeath2, new { @class = "fixed-width form-control", type = "number", id = "YearOfDeath2", min = 0, required = "required" })
+                    @Html.ValidationMessageFor(m => m.YearOfDeath2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        </div>
+
+        <div style="margin-top: 20px">
+            <div>
+                <button type="submit" class="btn btn-orange">Submit</button>
+                <button type="button" class="btn btn-secondary" id="resetButton">Reset</button>
+            </div>
+        </div>
+    }
+</div>
+
+@if (ViewBag.YearSum != null)
+{
+    <hr id="resultHr" />
+    <h4 id="resultHeader">Result:</h4>
+    <p id="desc">
+        The average number of
+        people the witch killed on year of birth of those people @ViewBag.EndIndex: <strong>@ViewBag.YearSum</strong>
+    </p>
+}
+
+@section Scripts {
+    <script>
+        document.getElementById('resetButton').addEventListener('click', function () {
+            document.getElementById('AgeOfDeath1').value = '';
+            document.getElementById('YearOfDeath1').value = '';
+            document.getElementById('AgeOfDeath2').value = '';
+            document.getElementById('YearOfDeath2').value = '';
+
+            document.getElementById('resultHr').style.display = 'none';
+            document.getElementById('resultHeader').style.display = 'none';
+            document.getElementById('desc').style.display = 'none';
+    });
+    </script>
+}
+
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+    }
+
+    .title {
+        font-family: Harrington;
+        font-weight: bold;
+        text-align: center;
+        color: darkorange;
+    }
+
+    .sub {
+        text-align: center;
+        color: dimgrey;
+    }
+
+    .fixed-width {
+        width: 20ch; 
+    }
+
+    .form-horizontal {
+        text-align: right;
+        padding-right: 20px;
+    }
+
+    .label {
+        text-align: left;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+
+    .col-md-2 {
+        text-align: right;
+        flex: 0 0 auto;
+        align-content: center;
+        width: 130px;
+        font-size: smaller;
+        margin-bottom: 10px;
+    }
+
+    .col-md-10 {
+        align-content: center;
+        text-align: -webkit-center;
+        margin-bottom: 10px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .btn-orange {
+        color: dimgrey;
+        background-color: orange; 
+        border-color: orange; 
+        font-weight: bold;
+    }
+
+    .btn-orange:hover {
+        background-color: darkorange;
+        border-color: darkorange;
+    }
+</style>
